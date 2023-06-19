@@ -1,58 +1,65 @@
- import React,{useState} from "react"
- 
-  const App=()=>{
-    const [gender,setGender]=useState("")
+import React, { useState } from "react";
+let arr = ['Siblings','Friends','Love','Affection','Marriage','Enemy'];
+const App = () => {
+  const [bname, setBname] = useState("");
+  const [gname, setGname] = useState("");
+  const [relationship, setRelationship] = useState("");
+  const [click,setClick]=useState(false)
 
-  
-
+  function findRelationship() {
     
+    
+    if (bname ==="" || gname==="") {
+      return setRelationship("Please enter valid input");
+    }
+    for (let c of bname) {
+      if (gname.includes(c)) {
+         setBname(bname.replace(c, ""));
+         setGname(gname.replace(c, ""));
+      }
+      console.log(bname,gname)
+    }
 
-   return (
-     <div>
-       <h2>Select your gender:</h2>
-
-       <input
-         type="radio"
-         name="gender"
-         id="male"
-         value="male"
-         onClick={(e) => setGender(e.target.value)}
-       />
-       <label forHTML="male">Male</label>
-
-       <input
-         type="radio"
-         name="gender"
-         id="female"
-         value="female"
-         onClick={(e) => setGender(e.target.value)}
-       />
-       <label forHTML="female">Female</label>
-       {gender == "male" && (
-         <div>
-           <h2>Select your Shirt size</h2>
-           <select>
-             <option value="large">large</option>
-             <option value="medium">medium</option>
-             <option value="small">small</option>
-           </select>
-         </div>
-       )}
-       {gender == "female" && (
-         <div>
-           <div>
-             <h2>Select your Shirt size</h2>
-             <select>
-               <option value="Select size">Select size</option>
-               <option value="2">2</option>
-               <option value="4">4</option>
-               <option value="6">6</option>
-             </select>
-           </div>
-         </div>
-       )}
-     </div>
-   );
+   setClick(true)
   }
 
-  export default App;
+  return (
+    <div>
+      <input
+        type="text"
+        id="mname"
+        data-testid="input1"
+        placeholder="Enter First name"
+        onChange={(e) => setBname(e.target.value)}
+      />
+      <input
+        type="text"
+        id="fname"
+        placeholder="Enter Second name"
+        data-testid="input2"
+        onChange={(e) => setGname(e.target.value)}
+      />
+      <button data-testid="calculate_relationship" onClick={findRelationship}>
+        Calculate Relationship Future
+      </button>
+      <button
+        data-testid="clear"
+        onClick={() => {
+          setBname("");
+          setGname("");
+          setRelationship("")
+          setClick("false")
+        }}
+      >
+        Clear
+      </button>
+      <h3 data-testid="answer">
+       { click &&
+        arr[(bname.length+gname.length)%6]}
+        </h3>
+        
+    </div>
+  );
+};
+
+export default App;
