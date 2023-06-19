@@ -27,14 +27,15 @@ const App = () => {
     <div>
       <input
         type="text"
-        id="mname"
+        name="name1"
         data-testid="input1"
         placeholder="Enter First name"
         onChange={(e) => setBname(e.target.value)}
       />
       <input
         type="text"
-        id="fname"
+        
+        name="name2"
         placeholder="Enter Second name"
         data-testid="input2"
         onChange={(e) => setGname(e.target.value)}
@@ -47,17 +48,15 @@ const App = () => {
         onClick={() => {
           setBname("");
           setGname("");
-          setRelationship("")
-          setClick("false")
+          setRelationship("");
+          setClick("false");
         }}
       >
         Clear
       </button>
       <h3 data-testid="answer">
-       { click &&
-        arr[(bname.length+gname.length)%6]}
-        </h3>
-        
+        {click && arr[(bname.length + gname.length) % 6]}
+      </h3>
     </div>
   );
 };
